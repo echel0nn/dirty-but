@@ -1,0 +1,70 @@
+  374  snmptranslate -On CISCO-RHINO-MIB::ciscoLS1010ChassisFanLed
+  375  ü
+  376  ~
+  377  cd ~
+  378  ls
+  379  ls -al
+  380  cd .snmp
+  381  mkdir .snmp
+  382  cd .snmp/
+  383  ls
+  384  mkdir mibs
+  385  cd mibs
+  386  nautilus
+  387  mkdir /etc/snmp
+  388  echo rocoummnity echelon >> /etc/snmp/snmpd.conf
+  389  systemctl restart snmpd
+  390  snmpwalk -v 1 -c echelon localhost | less
+  391  snmpwalk -v 1 -c echelon localhost
+  392  net-snmp-config --snmpconfpath
+  393  vim /etc/snmp/snmp.conf
+  394  net-snmp-config --default-mibdirs
+  395  ls
+  396  file 139.59.143.122 
+  397  cat 139.59.143.122 
+  398  rm 139.59.143.122 
+  399  cd /var/net-snmp/mib_indexes/
+  400  ls
+  401  vim /etc/snmp/snmpd.conf 
+  402  snmpwalk -v 1 -c echelon localhost
+  403  snmpwalk -v 1 -c echelon localhost system
+  404  snmpwalk -v 1 -c echelon localhost
+  405  snmpwalk -v2c -c public localhost system
+  406  snmpwalk -v2c localhost system
+  407  snmpwalk -v2c -c echelon localhost system
+  408  vim /etc/snmp/snmpd.conf 
+  409  systemctl restart snmpd
+  410  snmpwalk -v2c -c public localhost system
+  411  snmpwalk -v2c -c echelon localhost system
+  412  snmpwalk -v2c -c echelon localhost system
+  413  snmpwalk -Dparse-mibs -v 1 -c echelon 127.0.0.1 system
+  414  netstatt
+  415  netstat -aunt
+  416  netstat -aunt | grep -i 161
+  417  snmpwalk -v 1 -c echelon localhost
+  418             
+  419  zsh
+  420  vim snmpd.conf 
+  421  systemctl restart snmpd
+  422  vim snmpd.conf 
+  423  systemctl restart snmpd
+  424  vim snmpd.conf 
+  425  snmpwalk -v 1 -c public localhost
+  426  snmpwalk -v 1 -c public localhost
+  433  snmpwalk -v 1 -c public localhost 3.6.1.2.1.1.1.0
+  434  snmpwalk -v 1 -c public localhost 
+  435  snmpwalk -v 1 -c public localhost | head
+  436  ls
+  437  vim snmpd.conf 
+  438  systemctl restart snmp
+  439  systemctl restart snmpd
+  440  snmpwalk -v 1 -c public localhost | head
+  441  yaourt zash
+  442  yaourt zsh
+  443  zsh
+  444  history
+  445  snmpwalk -v 1 -c echelon localhost
+  446  snmpwalk -v 1 -c publick localhost
+  447  snmpwalk -v 1 -c public localhost
+  448  history
+

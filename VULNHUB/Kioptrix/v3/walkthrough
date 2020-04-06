@@ -1,0 +1,63 @@
+They wrote the services in description:
+
+Apache
+MySQL
+OpenSSH
+PHP
+
+listed vulnerabilities as:
+File Inclusion
+Improper Access Control
+Reused Credentials
+SQL Injection
+Unrestricted Upload of File with Dangerous Type
+Weak Credentials
+
+
+I reconfigured my /etc/hosts file
+then went to website. I saw It is provided by
+LotusCMS. I searched the exploits and I found Remote Code Execution vulnerability. I edited the exploit code to accomplish this task.
+And I am in. So Last task is getting root. I searched the exploit-db 2.4.x local privilege exploits and I found
+exploits/linux/local/9545.c, It didn't worked. So searched the /home directory and I found README file.
+It looks like we can use ht(text editor) command while we are superuser. But We have to login to loneferret.
+
+I returned to website IF any SQLi exists on other pages to find what database holds on.
+I have encountered with the javascript file in /gallery/themes/black/javascript.js
+Which shows me
+
+function gallarific_sort(field, gallery_id,path) {
+	document.location.href = path+"gallery.php?id="+gallery_id+"&sort="+field+"#photos";
+}
+
+so there is ' /gallery/gallery.php?id= ' existing. It is trying to get gallery id i suppose to show items of it.
+
+Yes It has SQL injection.
+
+Database: gallery
+Table: gallarific_users
+[1 entry]
++--------+---------+---------+---------+----------+----------+----------+-----------+----------+-----------+------------+-------------+
+| userid | photo   | email   | website | username | lastname | joincode | usertype  | password | firstname | datejoined | issuperuser |
++--------+---------+---------+---------+----------+----------+----------+-----------+----------+-----------+------------+-------------+
+| 1      | <blank> | <blank> | <blank> | admin    | User     | <blank>  | superuser | n0t7t1k4 | Super     | 1302628616 | 1           |
++--------+---------+---------+---------+----------+----------+----------+-----------+----------+-----------+------------+-------------+
+
+Database: gallery                                                                                                                                                                                                                            
+Table: dev_accounts
+[2 entries]
++----+------------+---------------------------------------------+
+| id | username   | password                                    |
++----+------------+---------------------------------------------+
+| 1  | dreg       | 0d3eccfb887aabd50f243b3f155c0f85 (Mast3r)   |
+| 2  | loneferret | 5badcaf789d3d1d09794d8f021f40f0e (starwars) |
++----+------------+---------------------------------------------+
+
+i will try loneferret credentials on SSH connection.
+Yes it is corect!
+we can use to change sudoers file.
+i have deleted the '!' then change it to /bin/su
+It became like
+loneferret ALL=NOPASSWD: /bin/su, /usr/local/bin/ht
+
+That's it. It was easy.
+

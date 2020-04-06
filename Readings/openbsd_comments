@@ -1,0 +1,67 @@
+Yazar openBSD'nin başlığını öyle atmasına rağmen kesinlikle openBSD'nin çok kötü bir güvenliği olduğunu
+savunmuyor fakat insanların konuşmaya çekindiği konuya değinmek istediğini söylüyor.
+
+OpenBSD'nin herhangi artı güvenlik politikası sağlamadığını sadece standart UNIX izinlerinin üstünde
+sınırlandırılmasına gerçek bir çözüm vermiyor olduğunu, bununda yetersiz olduğunu savunuyor.
+
+OpenBSD'nin şu an ki en iyi güvenilir işletim sistemi olmasını göz önünde bulundurursak, openBSD geliştiricilerinin
+en önceliği kaliteli kod yazması. Kaliteli kod yazılmasından kaynaklı zafiyetleri direk elenmesini sağlıyor.
+Öyle ki, bu işletim sisteminin çok uzun zamandır zafiyet bulunamamasının sebebi budur.
+Fakat extended access control frameworkleriyle karşılaştırıldığında temelde yetersiz kaldığını söylüyor.
+
+Bahsettiği extended access control frameworkleri Mandatory Access Control(MAC), RBAC, TE ve bunlar gibi bir çok framework.
+Genelde linux'da implementasyonları mevcut test edilebilirliği çok yüksek olduğu için.
+(SELinux, RSBAC, GRSecurity(1. önceliği access control değil),AppArmor)
+
+Resmi olarak SMACK ve Tomoyo implementasyonları da linux çekirdeğinde mevcut. ( TrustedBSD ve Trusted Solaris'de de mevcut.)
+
+Bunların hepsi fazladan güvenlik sağlıyor openBSD default kurulumuna göre, diyor yazar.
+
+
+OpenBSD yaygın olarak " secure by default " diye lanse edilmektedir. Varsayılan olarak
+güvenli, temel sistemin denetlendiği ve güvenlik açıklarından arındılmış bir şekilde ve bunu 
+fazla servis kullanmadan hallediyor. Bu yaklaşımları bu kadar zaman geçmesine rağmen sadece
+2 önemli zafiyetin bulunması, onların başarısını göstermekte.
+
+Fakat bununla birlikte openBSD'nin güvenliğini ölçmek için gösterge olarak kullanılmasına rağmen
+değersiz kalıyor yazarın dediğine göre. Başka bir hizmet için port açıldıktan sonra diğer işletim
+sistemlerinden bir fark kalmıyor ve artık varsayılan kurulumdan çıkmış oluyor.( Araştırmam gereken konu,
+port tree denetlenmemesinin olmamasını açıklıyor burada özellikle.)
+
+Tabi burada openBSD takımı güvenlik zafiyetlerini farklı değerlendirdiği için farklı bir bakış açısından
+bakılmasını gerektiğini söylüyor.OpenBSD takımına göre yerel yetki yükseltme veya DOS saldırılarının örnek
+olarak hiç bir zaman zafiyet olarak görmediklerini söylüyor.
+
+Ayrıca FreeBSD ile karşılaştırıldıklarında openBSD onun çok geride kaldığını düşünüyor yazar.
+TrustedBSD'nin implemetasyonu FreeBSD'yi güvenlik açısından çok ileriye götürdüğünü söylüyor.
+FreeBSD'de normal access control lists, event auditing, extended file system özellikleri
+ve mandatory access control implemetasyonları sistemi komple izole etmeyi sağlıyor.
+
+TrustedBSD'nin openBSD'i üzerinde geliştirmeye açık ve implementasyonu olması mümkün iken,
+openBSD geliştiricileri bu access control mekanizmasını çok fazla komplex bulup gereksiz buluyor, yazarın
+dediğine göre.Ve örneğine göre Çin devleti FreeBSD'yi ana işletim sistemi olarak kullanmaya başlamış.
+
+Ne kadar kaliteli ve zafiyet içermeyen kod yazılıyor olursa olsun, standart UNIX izinlerini kısıtlayarak
+gerçekten o kadar da güvenilir bir işletim sisteminden bahsedilemez.The de Raadt bir konuşmasında bu
+implementasyonlarına komple karşı olduğunu açıklamış, bu utanç kaynağıdır diyor yazar. Buna karşı olmanın
+hiç bir mantığı olmadığını eklemiş.
+
+openBSD'nin chroot işlevselliği, chflags ve securelevels bazında çok basit korumaları olduğunu savunuyor.
+FreeBSD'nin kat kat ileri de olduğunu savunmuş.
+
+OpenBSD'de araç olarak systrace olduğunu ve community'si tarafından kullanıldığını söylüyor. Systrace 3. parti bir araç
+ve Niels Provos tarafından geliştirilmiş hiç bir zaman takım içinde yer almamış. Systrace normal bir MAC implementasyonunda
+daha az yönlü kalıyormuş. ( Böyle yazınca içi çok boş geldi, bütün cümleyi yazıyorum.)
+Systrace lacks the versatility of a proper MAC implementation, and had similar weaknesses to AppArmor since it relies on pathnames for enforcement.
+Systrace is a form of system call interposition, which has been shown to be insecure.
+
+Bu tür policy frameworklerinin ileride ihtiyaca göre gelişip olgunlaşacak olacağında, openBSD'nin geri kalacağını savunuyor.
+OpenBSD sistemi bir saldırganın sisteme erişebildiği durumlarda kullanıcıları kısıtlamaması, veya sistemde bazı servislerin,uygulamaların
+ve izinlerin düzenlenmemesi daha az güvenilir bir platform olarak kabul edilecektir zaman içerisinde.Tabi, extended access control'de 
+mükemmel bir çözüm sunmamasına rağmen, yeterli olmadıkları halde yine de daha güvenilir bir çözüm olduğunu düşünebiliriz diyor yazar.
+
+Ve ek olarak linux'un güvenliği gerçekten önemsenmese de ve öncelik olarak görülmeyen Linux'larda bile, bu extended access control'lerin
+varlığı nedeniyle openBSD'den daha güvenli hale gelmesini sağlamaktadır diye ekliyor. Sadece ana sistemin kod seviyesinde güvenilir olması,
+tüm hataları basitçe ortadan kaldırmaya çalışmak ve kısıtlamalara gitmek, burada daha aşağı bir yaklaşım olarak görüyor.
+
+

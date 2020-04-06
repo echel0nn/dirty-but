@@ -1,0 +1,14 @@
+e -> öndeki kelimenin sonuna git
+w -> öndeki kelimenin başlangıcına git
+b -> arkadaki kelimenin başlangıcına git
+$ -> satırın sonuna git
+0 -> satırın başlangıcına git
+G -> dosyanın sonuna git
+gg -> dosyanın başlangıcına git
+
+:%s/DEGISTIRILCEK_YAZI/DONUSECEK_YAZI ( butun dosyada )
+:%s/degistirilcek_Yazi/donusecek_Yazi/c ( butun dosyada arar ok dersen değiştirir)
+
+DEGISTIRDIM_SENI
+
+

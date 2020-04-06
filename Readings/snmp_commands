@@ -1,0 +1,11 @@
+snmptranslate: learning about the MIB tree.
+snmpget: retrieving data from a host.
+snmpgetnext: retrieving unknown indexed data.
+snmpwalk: retrieving lots of data at once!
+snmptable: displaying a table.
+snmpset: peforming write operations.
+snmpbulkget: communicates with a network entity using SNMP GETBULK request
+snmpbulkwalk: retrieve a sub-tree of management values using SNMP GETBULK requests.
+snmptrap: Sending and receiving traps, and acting upon them.
+Traps/informs with SNMPv3/USM: Sending and receiving SNMPv3/USM TRAPs and INFORMs
+Sending Traps/Informs via AgentX: Sending notifications from the command line through snmpd

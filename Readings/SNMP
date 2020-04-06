@@ -1,0 +1,22 @@
+SNMP( Simple Network Management Protocol )
+----------------------------------------------
+Adından da anlaşılacağı gibi ağı yönetirken, ağ yöneticisine
+yardımcı olan basit bir uygulama katmanı protokolüdür. Temel anlamda,
+geniş ağlarda cihazların yönetimini ve denetimini kolaylaştırmak için tasarlanmıştır.
+SNMP kullanılarak ağda bulunan Yönlendirici( Router ), Anahtarlayıcı ( Switch ), Erişim Sunucusu
+( Access Server ), Köprü ( Bridge ) ve hatta bilgisayar gibi cihazların sıcaklık, cihaza bağlı kullanıcılar,
+İnternet bağlantı hızı, cihaz çalışma süresi gibi temel bilgiler elde edilebilir. Bu şekilde ağın performansı artıralabilir,
+ağdaki problemler bulunup çözülebilir ya da ağda büyüme için önceden planlama yapılabilir. TCP/IP protokülünün bir parçası olan SNMP,
+IP adreslerini kullandığı için sadece kendi fiziksel ağını değil yönlendiricilerin diğer arayüzlerinin de kontrol edilmesini sağlar.
+SNMP, ajan uygulama, yönetici uygulama ve ağ yönetimi sistemi adı verilen 3 bileşenden oluşmaktadır.
+
+	-- Ajan Uygulama: Ağdaki cihazlar üzerinde çalışan uygulamadır. Bu uygulama ile cihazın gerekli bilgileri
+	   alınır ve kayıtlı tutularak yönetici uygulamaya aktarılır. Aynı şekilde yöneticiden gelen değişiklikler
+	   bu uygulama tarafından cihaza uygulanır. Yani kısacası bu uygulama, SNMP'nin, kullanılacağı cihazlar
+	   üzerinde çalışan bileşenidir.
+	-- Yönetici uygulama: Ajan uygulama ile ağ yöneticisi arasındaki bilgi akışını sağlayan uygulamadır. Yani,
+	   ajan uygulamadan aldığı cihaz bilgilerini yöneticiye, yöneticiden aldığı yapılandırma değişiklik isteklerini de
+	   ajan uygulamaya ileten bileşendir.
+	-- Ağ Yönetim Sistemi: Yönetici birimde çalışan ve tüm ağdaki cihazların bilgilerinin eş zamanlı olarak izlenmesini
+	   ve yönetimini sağlayan yazılımdır.
+

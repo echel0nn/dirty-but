@@ -1,0 +1,25 @@
+#1 Sorting Cache Limit 
+Varsayılan ayarda sorting cache limiti yok
+ /etc/elasticsearch/elasticsearch.yml dosyasında
+ indices.fielddata.cache.size: 75%
+ indices.breaker.fielddata.limit: 40%
+
+ şunları eklemek yararlı olacaktır.
+
+
+#2 Heap limitini yükseltmek
+/etc/sysconfig/elasticsearch dosyasında
+ES_HEAP_SIZE değerini 50% yapmak kullanabilir
+RAM'in JVM tarafından daha fazla kullanılmasını
+sağlayacaktır. Varsayılan ayar 250mb'dir.
+
+
+
+#3 mlockall'ı aktive etmek, işletim sisteminin
+   JVM'in kullandığı RAM'in swap yapmasını engeller.
+ 
+    etc/elasticsearch/elasticsearch.yml dosyasında;
+  
+    bootstrap.mlockall: true
+
+

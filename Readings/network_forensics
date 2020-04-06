@@ -1,0 +1,41 @@
+--FIN ya da SYN bitleri set edilmiş TCP paketlerini yakalamak için;
+
+	#tshark -i eth0 -f "tcp[13] = 0x02 or tcp[13] = 0x01"
+
+--1912 nolu UDP portuna ait paketleri yakalamak için;
+
+	#tshark -i eth0(interface-name)  -f "udp port 1912" 
+
+--PCAP dosyasına kaydedilmiş paketlerin içinden 192.168.1.1'e gelen ve
+  giden paketleri görüntülemek için;
+
+	#tshark -R "ip.addr==192.168.1.1" -r /dosya/yolu/uzantisi/ornek.pcap
+
+Filtrelemek için örnek olarak değerler:
+	*- Ethernet adresi 00:15:02:00:15:02 olan bilgisayar ait
+	   paketler için --> eth.addr == 00:15:02:00:15:02
+	*- ARP protokolüne ait paketler: eth.type == 0x0806
+	*- Ethernet ağlardaki broadcast paketler
+	   --> eth.addr == ff:ff:ff:ff:ff:ff
+	*- ARP hariç bütün paketler --> not arp
+	*- Sadece IP paketleri --> ip
+	*- 192.168.1.1 IP'sine sahip bilgisayara ait paketler
+	   --> ip.addr == 192.168.1.1
+	*- 192.168.1.1 haricindeki bütün IP adresleri
+	   --> !(ip.addr==192.168.1.1)
+	*- Sadece IPX paketleri --> ipx
+	*- Sadece TCP trafiği --> tcp
+	*- Sadece UDP trafiği --> udp
+	*- 53 UDP port'u hariç tüm paketler --> !(udp.port==53)
+	*- 80 TCP&UDP port'lu paketler --> tcp.port == 80 || udp.port==80
+	*- Sadece HTTP trafiği --> http
+	*- ARP ve DNS harici --> not arp and not(udp.port==53)
+	*- 192.168.1.1'e gelen veya 192.168.1.1'den giden HTTP
+	   trafiği --> not(tcp.port==80) and ip.addr ==192.168.1.1
+
+	en çok ziyaret edilen 10 URL'u bulmak için;
+
+	*-tshark -r capture.pcap http.request -T fields -e http.host -e http.request.uri | sed -e ‘s/?.*$//’ | sed -e ‘s#^\(.*\)\t\(.*\)$#http://\1\2#’ | sort | uniq –c | sort -rn | head
+
+	HTTP Response kodları için;
+	*-tshark -r capture.pcap -T fields -e http.response.code “http.response” | sort | uniq –c

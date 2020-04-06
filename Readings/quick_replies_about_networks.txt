@@ -1,0 +1,30 @@
+Where Does routing occur within the DoD(Department of Defense) TCP/IP reference model?
+	# Internet Layer
+Layer 4 > 1
+APPLICATION > TRANSPORT > INTERNET > NETWORK ACCESS | TCP/IP
+APPLICATION>PRESENTATION>SESSION>TRANSPORT>NETWORK>DATA LINK>PHY| OSI
+
+A network interface port has collision detection and carrier sensing
+enabled on shared twisted pair network.What can I say for this network?
+	# It is an ethernet port operating at half duplex.
+		(FULL Dplx & Half Dplx )
+		------------------------
+        	Get and send datas with same time.(FLL)
+        	Only one operation to do with same time. (HALF)
+
+Which layer in the OSI reference model is responsible 
+for determining the availability of the receiving 
+program and checking to see if enough resources exist for that communication?
+
+# Application! The application layer is responsible for identifying and establishing
+the availablility of the inteded communication partner and determning wheter
+sufficient resources for the inteded communication exist.
+
+
+A router has two Fast Ethernet interfaces and needs to connect to four VLANs in the local
+network. How can you accomplish this task, using the fewest physical interfaces and
+without decreasing network performance?
+
+# Implement a router-on-a-stick configuration.
+A router on a stick allows you to use sub-interfaces
+to create multiple logical networks on a single physical interface.

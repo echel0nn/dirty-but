@@ -1,0 +1,8 @@
+VBoxManage convertfromraw --format VDI [filename].img [filename].vdi
+
+Reverse it --
+
+VBoxManage clonehd --format RAW [filename].vdi [filename].img
+
+
+qemu-img convert -O vmdk 2.vdi 2.vmdk

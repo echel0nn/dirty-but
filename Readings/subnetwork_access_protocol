@@ -1,0 +1,15 @@
+
+
+SNAP - SubNetwork Access Protocol
+---------------------------------
+
+SubNetwork Access Protocol (SNAP), IEEE 802
+network'lerinde IP datagramlarının iletimi için
+bir standarttır. Bu IP datagramlarının SNAP veri
+bağlantısı katmanları (data link layers) 802.3, 802.4 veya
+802.5, physical network katmanı ve 802.2 LLC'yi kullanan
+IEE 802 dışı fiziksel ağ katmanlarıyla da kullanılır.
+SNAP  LLC (Logic Link Control) başlığı altında
+açıklanmıştır. ARP isteklerinin ve yanıtlarının ve IEEE
+802 network'larının IP datagramlarının kapsüllenmesi için
+tasarlanmıştır.

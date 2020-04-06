@@ -1,0 +1,61 @@
+At The Application Layer
+-----------------------------------------
+BOOTP – Bootstrap Protocol
+DHCP – Dynamic Host Configuration Protocol
+DNS – Domain Name System (Service) Protocol
+FTP – File Transfer Protocol
+HTTP – HyperText Transfer Protocol
+IMAP – IMAP4, Internet Message Access Protocol (version 4)
+IRCP – Internet Relay Chat Protocol
+LDAP – Lightweight Directory Access Protocol
+LPD – Line Printer Daemon Protocol
+MIME (S-MIME) – Multipurpose Internet Mail Extensions and Secure MIME
+NFS – Network File System
+NIS – Network Information Service
+NNTP – Network News Transfer Protocol
+NTP – Network Time Protocol
+POP – POP3, Post Office Protocol (version 3)
+RDP – Remote Desktop Protocol
+RPC – Remote Procedure Call
+SMB – Server Message Block
+SMTP – Simple Mail Transfer Protocol
+SNMP – Simple Network Management Protocol
+SNTP – Simple Network Time Protocol
+SSH – Secure Shell
+TELNET – Terminal Emulation Protocol of TCP/IP
+TFTP – Trivial File Transfer Protocol
+X.400 – Message Handling Service Protocol
+X.500 – Directory Access Protocol (DAP)
+-----------------------------------------
+
+At the Host to Host / Transport Layer
+
+-------------------------------------
+ATP – AppleTalk Transaction Protocol
+FCP – Fiber Channel Protocol
+NBF – NetBIOS Frames protocol
+SPX – Sequenced Packet Exchange
+TCP – Transmission Control Protocol
+UDP – User Datagram Protocol
+At the Internet Layer you can find:
+IPv4 – Internet Protocol v4
+IPv6 – Internet Protocol v6
+ICMP – Internet Control Message Protocol
+IGMP – Internet Group Management Protocol
+IPSec – Internet Protocol Security
+---------------------------------------
+
+At the final layer of the TCP/IP Model,
+	Network Layer
+
+---------------------------------------
+
+Ethernet
+Token Ring
+FDDI – Fiber Distributed Data Interface
+X.25
+Frame Relay
+RS-232
+v.35
+
+

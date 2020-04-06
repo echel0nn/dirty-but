@@ -1,0 +1,136 @@
+Ağ topolojileri nedir?
+*- Bir ağdaki cihazların veri aktarımının nasıl olacağını belirleyen
+   yapıdır.
+
+*- Fiziksel topoloji: Ağın fiziksel olarak nasıl görüneceğini belirler.
+   ( Fiziksel Katman )
+
+*- Mantıksal topoloji: Bir ağdaki veri akışının nasıl olacağını belirler.
+   ( Veri iletim katmanı )
+
+
+Ağ topoloji türleri nelerdir?
+
+*- Doğrusal ( Bus Topology)
+*- Halka ( Ring Topology )
+*- Star-wired Ring
+*- Ağaç ( Tree Topology )
+*- Karmaşık ( Mesh Topology )
+
+Bus Topology
+---------------------
+
+*- Bir kablo yol olarak düşünülürse, bu yol üzerindeki
+her birek durak ağda bir node'u temsil etmektedir.
+
+*- Bu tek kabloya; segment, backbone(omurga) veya trunk denilebilir.
+
+Avantajları:
+	*- Ağa bir bilgisayarı bağlamak oldukça kolay.
+	*- Daha az uzunlukta kablo kullanır.
+Dezavantajları:
+	*- Omurga kabloda bir bozulma veya kesilme olursa
+	   tüm bağlantılar kesilir.
+	*- Kablonun sonunda sonlandırıcı ( Terminator ) olmalıdır.
+	*- Ağda sorun olduğunda sorunun kaynağını bulmak zaman alabilir.
+	*- Tek başına komple binanın ağ çözümü için kullanılmaz.
+
+CSMA/CD ( Carrier Sense Multiple Access / Collision Detect )
+-----------------------------------------------------------------
+*- Ethernet ve IEEE 802.3 standartlarında kullanılan bir protokol.
+*- Çarpışmayı bulma ( CD )
+*- Bir ethernet kartı bilgi
+
+*-Devam---------------------*
+
+CSMA/CD
+----------
+*- Ethernet ve IEEE 802.3 standartlarında kullanılan bir protokol.
+*- Çarpışmayı bulma ( CD )
+*- Bir ethernet kartı bilgi göndereceği zaman ağ trafiğini izler.
+*- Ana kabloda veri yoksa veriyi iletir.
+*- Eğer meşgul ise kablo, veri aktarımı hedefe ulaşana kadar bekler, ardından yollar.
+*- Eğer bu işlemler başarısız olursa çarpışma meydana gelir.
+
+
+En çok kullanılan 802 Standartları
+---------------------------------------
+
+*-IEEE 802.3, hızı 10/100/1000 mbps, erişim methodu CSMA/CD, topoloji bus, kablo koaksiyel
+veya UTP kullanılır.
+
+*-IEEE 802.5( Token Ring ), 4 veya 6 mbps, erişim methodu token passing, topoloji halka ve star-wired ring,
+kablo STP veya UTP.
+
+*-IEEE 802.8, hızı 100 veya 200 mbps, token passing erişim methodu, topoloji halka ve star-wired ring,kablo
+fiber optik veya UTP
+
+*-IEEE 802.11 ( Wireless ), hız 1.22 veya 54 mbps, erişim methodu CSMA/CD, topoloji hücresel, kablo yok.
+
+
+Halka ( Token Ring ) Topoloji
+-------------------------------
+*- IBM tarafından geliştirilmiştir.
+*- Mantıksal olarak bir daire şeklinde tüm node'ların birbirine bağlanması.
+*- Halka içerisindeki bir cihaz bozulursa tüm ağ bağlantısı kesilir.
+*- Çarpışma olasılığı düşüktür.
+*- Şu anda halka topolojilerde UTP,STP kablo kullanılmaktadır.
+*- İlk halka topolojiler; 4Mbps(CAT3 UTP), daha sonra 16 Mbps(CAT4 ve üstü veya STP Tip 4) çalışmaktadır.
+*- Halka topolojiye uygun ethernet kartları; 4 veya 16 Mbps'da çalışır.
+
+Halka Topoloji & Star-Wired Ring
+---------------------------------
+*- Yerleşim fiziksel olarak yıldız olarak görünür ancak mantıksal olarak jeonlar dairesel olarak ağda ilerler.
+*- Yıldız topolojisindeki Hub yerine burada MAU ( Multistation Access Unit ) veya MSAU kullanılır.
+*- Bu MAU'da veriler dairesel olarak gider.
+	* Hub kendisine gelen bütün sinyalleri tüm düğümlere iletirken MAU gelen sinyali bir halka şeklinde
+	  sadece bir yönde iletir. Böylece ağdaki tüm düğümler jetonu alır.
+
+İki MAU bağlanması için MAU'daki RI ( Ring In ) ve RO ( Ring Out portları kullanılır.)
+
+
+Yıldız Topoloji
+-----------------
+*- Tüm düğümlerin ortak bir merkeze ( örn: switch veya hub ) bağlanmasıdır.
+
+	+ Ağı kurmak kolaydır.
+	+ Bir bilgisayara bağlı kablo bozulduğunda ağın çalışması etkilenmez.
+	+ Ağdaki sorunları tespit etmek kolaydır.
+	
+	- Hub kullanıldığında ağ trafiği artar.
+	- Doğrusala ( bus ) göre daha fazla uzunlukta kablo gerektirir.
+	- Hub veya switch bozulduğunda tüm ağ çalışmaz hale gelir.
+	- Hub ve switch gibi cihazlar nedeniyle doğrusala göre kurulumu daha pahalıdır.
+
+Ağaç Topoloji
+------------------
+*- Genellikle yıldız topolojisindeki ağları birbirine bağlamak için kullanılır.
+   Böylece ağlar büyütülebilir.
+*- Bir ağacın dalları farklı topolojilerdeki ağları temsil eder, ağacın gövdesi ile de bunlar
+   birbirine bağlanabilir.
+*- Hiyerarşik yapıdaki ağlar için kullanılır.
+
+	+ Her bir bölüme ulaşmak kolaydır.
+	+ Bir çok çalışma grubu bir araya getirilebilir.
+	- Her bir bölümün uzunluğu kullanılan kablo ile sınırlıdır.
+	- Omurga kablosu bozulduğunda bölümlerdeki ağ trafiği etkilenir.
+	- Kurulumu ve düzenlenmesi daha zordur.
+
+Karmaşık ( Mesh ) Topoloji
+---------------------------
+*- Gerçek Mesh topolojide tüm nodelar ağ içerisinde birbirine bağlıdır.
+*- Daha çok WAN'da kullanılır.
+*- LAN'da kullanıldığında tüm düğümlerin birbirine mutlaka bağlı olması gerekmez.
+*- Hybrid mesh topoloji, karmaşık ağlarda ( veritabanı sunucularının uzak mesafeler arası bağlantılar vb.)
+   kullanılır.
+
+Özetle;
+	---------------------------------------------------------------------
+	|TOPOLOJİ|KURULUM  | DÜZENLEME|TROUBLESHOOT| VERİ AKTARIMI PROBLEMİ |
+	|-------------------------------------------------------------------|
+	|BUS     |ÇOK KOLAY|KISMEN ZOR|ZOR	   |Tek kablo bile etkiler  |
+	|HALKA   |K.  KOLAY|KISMEN ZOR|KOLAY	   |Halka bozukluğu etkiler |
+	|YILDIZ  |ZAMAN AL.|KOLAY     |KOLAY	   |Tek kablo,tek pc etkilr |
+	|AĞAÇ    |ZOR	   |ZOR	      |KOLAY	   |Oldukça az		    |
+	|KARMAŞIK|ZOR	   |ZOR	      |KOLAY	   |Oldukça az		    |
+	---------------------------------------------------------------------

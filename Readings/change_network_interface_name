@@ -1,0 +1,4 @@
+$ ip addr
+$ sudo ip link set dev INTERFACE_NAME down
+$ sudo ip link set dev INTERFACE_NAME name NEW_INTERFACE_NAME
+$ sudo ip link set dev NEW_INTERFACE_NAME up

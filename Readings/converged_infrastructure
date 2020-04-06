@@ -1,0 +1,21 @@
+	Converged infrastructure is an approach to data center management that seeks to minimize compatibility issues between server,
+storage systems and network devices while also reducing cost for cabling, cooling, power and floor space. A converged infrastructrure can be implemented with a CI reference architecture, with standalone appliances or with a software driven hyper-converged approach.
+
+	With a CI reference architecture approach to converged infrastructure
+  the vendor provides the customer with pre-tested recommendations for how best
+  to use hardware components in the data center to meet requirements specific workloads.
+
+	With an IT appliance approach to CI, the vendor provides
+	the customer with a single box that houses tightly integrated
+	compute, storage, networking virtualization resources from the
+	vendor and perphaps the vendor's partners. Should the need arise,
+ 	additional appliances can be purschased and added, a concept known
+	as horizontal scalability.
+
+	With a hyper-converged approach, the vendor abstracts compute,
+	networking and stroage resources from the physical hardware, bundling
+	virualization software with their CI offerings. Hyper-converged vendors
+	may also provide additional functionality for cloud bursting or disaster
+	recovery and allow administrators to manage both physical and virtual
+	infrastructures --whether on-site or in the cloud -- in a federated manner
+	with a single pane of glass.

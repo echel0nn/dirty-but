@@ -1,0 +1,19 @@
+XAMPP:
+	/xampp/apache/logs/access.log
+WAMP:
+	/wap/logs/access.log
+Debian / Ubuntu :
+	/var/log/apache/access.log
+	/var/log/apache2/access.log
+
+RHEL / Red Hat / CentOS / Fedora
+	/var/log/httpd/access_log
+
+FreeBSD
+	/var/log/httpd-access.log
+
+SMTP Mail
+	/var/mail/username
+	/var/spool/mail/username
+
+

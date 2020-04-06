@@ -1,0 +1,175 @@
+  OSI ( OPEN SYSTEMS INTERCONNECTION ) MODEL
+  ---------
+
+  data | application
+  data | presentation
+  data | session
+  segments | transport (End-To-End)
+  packets | network (Path,IP)
+  frames | data link ( MAC & LLC (logical link control) )
+  bits | physical
+
+-----------------------------------------------------
+Hub
+------
+En basit ağ cihazlarından biridir. Kendine ait bir güç kaynağından
+beslenerek çalışır. Ağ sistemlerinde sinyallerin yeniden oluşturmasını
+ve yeniden zamanlanmasını sağlar. Kendisine bağlı olan cihazlara paylaşılan
+bir yol sunar.( Kendisine gelen datayı bütün portlara gönderirler).Bundan
+dolayı aynı anda haberleşmek isteyen ağa bağlı cihazların, hattın boşalmasını
+beklemeleri gerekir. 8 ile 24 arasında değişen port sayısına sahip cihazlardır.
+Bu cihazlar ağ yapılarında genellikle merkezi bir nokta oluşturmak ya da ağın
+güvenliğini arttırmak gibi amaçlarla kullanılırlar ve sadece bit düzeyinde
+işlem yapmalarından dolayı OSI modelinde 1. katman cihazıdır. Hublar için
+iki farklı sınıflandırma yapılabilir. Bu cihazlar genel olarak aktif ya da pasif
+olmak üzere 2 grupta incelenebilir. Aktif hublar, gelen sinyali güçlendirerek
+çoklu kullanıcı ortamı için bölerken, pasif hublar ise gelen sinyali güçlendirmeden
+sadece çoklu kullanıcı ortamı için bölerler. Bundan dolayı pasif hublar kablo
+uzunluğunu arttırmak amaçlı kullanılmazlar.
+------------------------------------------------------
+Switch
+------
+Anahtarlama cihazları da hub gibi kendisine bağlı cihazlara yol sunar.
+Ancak hub cihazlarından farklı olarak anahtarlamalı olarak yol sunarlar.
+Ağ yapısına dahil iki bilgisayar birbiri ile haberleşirken anahtarlama özelliğinden
+dolayı diğer bilgisayarlar da aralarında iletişim kurabilirler. Bundan dolayı
+hub cihazlarına göre daha yüksek performans gösterirler. 8 ile 48 arasında değişen
+port sayısına sahip ve şaseli modelleri vardır.Şaseli switchlerde gerektiğinde
+port eklenebilir. OSI modelinde 2. katman cihazlarıdır. Paketleri MAC adreslerine
+göre yönlendirirler ve MAC adreslerine bağlı çarpışma alanları ayırırlar.
+Ağları birbirinden yalıtılmış kanallara bölerler ve özel bir durum olmadığı
+sürece gönderilen paket diğer kanallara karışmadığından trafiği bozmaz.
+
+
+
+
+
+Layer 2 Data Link: Fiziksel Adres, hata düzeltimi ve
+aktarılanı hazırlamaktan sorumludur.
+
+Layer 3 Network: Logical addressing'ten ve IP,ICMP,ARP,
+RIP,IGRP yönlendirilmesinden sorumludur.
+
+Şöyle ki layer 2 switch sadece MAC adresinden MAC adresine
+porttan porta yönlendirme yapabiliyor. Ayrıca hangi port
+hangi mac'te diye tablo tutuyor.
+
+Layer 3 switch switching'i layer 2 switch tekniğinin
+aynısını kullanır. Arasındaki fark intra-VLAN haberleşmesini
+yine MAC adresleri tablosunu kullanırken extra-VLAN için
+IP routing tablosunu kullanır.Yani routing destekler.
+
+Başka bir deyiş ile switch sadece köprüleme için ayarlandıysa
+layer 2 switch, sadece router için ayarlandıysa layer 3 switch
+diye adlandırılır.Çoğu zaman switchler ikisi beraber olacak
+şekilde ayarları yapılır.
+
+Layer 2 switching donanıma dayalıdır. MAC adresini kullanarak
+ağı filtreler. Tablo oluşturmak için ASIC(Application Spesific Integrated
+Circuits) yöntemi kullanılır.Layer 2'nin öne çıkan özelliklerini
+sıralamak gerekirse;
+
+1. Donanım temelli köprü (bridging)
+2. Hız
+3. Düşük Maliyet
+
+Layer 2 switching sürecinde üş işlem yerine getirir;
+  1. Adres öğrenme
+  2. Yönlendirme/Filtreleme
+  3. Döngü Önleme
+Adres öğrenme işlem her paketin MAC adresini veritabanında
+tutmasıyla sağlanır. Yönlendirme işlemi ise alınan paketin hedef
+adresinin bulunmasını sağlar. Döngü önleme özelliği ise,
+switchler arasında birden çok bağlantının olduğu durumlarda fazlalık
+oluşursa bu özellik döngüyü önler. Döngü önlemede STP(Spanning Tree Protocol)
+kullanılır.
+
+STP ( Spanning Tree Protocol )
+--------------------------------
+
+DEC tarafından geliştirilmiş ve IEEE tarafından 802.1 olarak kabul edilmiş
+bir protokoldür. STP ana görevi Layer 2 networklerinde oluşan döngüleri
+durdurmaktır. STP sürekli ağı izler ve döngü oluşmamasını sağlar.
+Ağ üzerinde bütün bağlantıları bulur ve fazla bağlantıları kapatır.
+Bu işlem ağ üzerinde bir kök köprü ( root bridge ) seçilmesi ile olur.
+Bir ağda sadece bir tane root bridge vardır.Diğer switchler ise
+nonroot bridge olarak belirtilir. Root Bridge öncelikle ve MAC adresinin
+numarasına göre seçilir. Bir STP'nin varsayılan önceliği 32,768'dir.
+Küçük MAC adresi seçime neden olur.
+
+Cisco için LAN switch modları şunlardır.
+1. Store and Forward
+2. Cut through
+3. FragmentFree
+
+Store and Forward
+-------------------
+1. Store and Forward switching ana LAN switching türlerinden biridir.
+Bu yöntem switch paketin tümünü kendi belleğine kopyalar ve CRC
+(Cyclic Redundacy Check) bilgisini hesaplar. Frame hata içermiyor ise
+hedef adres bulunur ve paket gönderilir. bu süreçte paketin tamamı switche
+kopyalandığı için gecikme yaşanabilir.
+
+Cut Through
+--------------------------
+2. Cut Through switching yönteminde ise switch yalnızca hedef adresi
+kopyalar.Ardından hedef adresi arar ve paketi gönderir. Bu yöntemde yalnız
+adres saklandığı için zaman olarak daha azdır.
+
+FragmentFree
+---------------------------
+3. FragmentFree yöntemi ise Cut Through yönteminin değişik şeklidir.
+Hata kontrolü özelliklerine sahiptir.
+
+VLAN := Virtual Local Area Network (Layer 2).
+
+VLAN ne zaman kullanmalıyız?
+Orta büyüklükte organizasyonlarda genelde oda veya katlara göre
+bölümlenir.(PC'ler, sunucular, yazıcılar, telefonlar vs vs.)
+Aslında router ile de bölünebilir fakat routerlar switchlere göre
+daha yavaş, daha çok pahalı ve port limiti bulunmakta.Genelde routerlar
+şirket veya kuruluş alt ağlarını bölümlemek için dizayn edilmez.
+IntraVLAN Routing := VLAN'lara ayırdığımızda ağdaki cihazların kendi aralarında
+Layer 2 katmanında yönlendirme yapamayacağımız için Layer 3 katmanında
+switching veya routing yapmamız gerekir.
+---------------------------------------------------------------------------
+
+Repeater
+-----------
+
+Tekrarlayıcılar, bir ethernet segmetinden aldığı elektriksel veriyi yenileyerek
+ve ikili koda dönüştürerek diğer segmente ileten ağ cihazlarıdır. Bu yönüyle tekrarlayıcı
+hem sinyal gücünün arttırılmasını, hem de elektriksel olarak bozulmuş sinyallerin
+iyileştirilmesini sağlar. Tekrarlayıcılar, telefon,telgraf, mikrodalga, optik
+haberleşme gibi pek çok sistemde kullanılmaktadır. Tekrarlayıcılar da hublar gibi
+sadece bit seviyesinde işlem yaptıklarından OSI modelinde 1. katman cihazlarıdır
+
+Bridge
+-----------
+
+Köprüler aynı protokolü kullanan iki veya daha fazla bağımsız ağı birbirine
+bağlamak için kullanılan ağ cihazıdır.Verinin adresi ağdaki herhangi bir adres
+ile örtüşüyorsa verinin o ağa geçmesine izin verir.
+
+
+Router
+--------------
+Programlanabilir ve gerekli ayarlar yapıldığında uzak bir ağa erişmek için mevcut
+birden fazla yol arasında kullanılabilecek en iyi yol (Best Determination Path)
+seçimini yapabilen ağ cihazlarıdır. Yönlendiriciler, bütün ağları ya da
+ağ bölümlerini birbirine bağlayabilir. OSI modelinde 3. katman cihazı olan
+yönlendiriciler gerekli arayüz modülleri kullanılarak OSI modelinde 2. katmanda
+çalışan birbirinden farklı iki ağ cihazını birbirine bağlayabilir.
+Sadece ağ adresi bilinen verilerin aktarılmasına izin vererek ağ trafiğini
+azaltırlar. Genel olarak dinamik yönlendiriciler ve statik yönlendiriciler
+olarak ikiye ayrılırlar. Dinamik yönlendiricilerde, rotalar otomatik olarak
+biçimlendirilir ve veri için en iyi rota yönlendirici tarafından seçilebilir.
+Statik yönlendiricilerde ise rotalar elle biçimlendirilir ve hep aynı rota
+kullanılır. Statik yönlendiriciler, dinamik yönlendiricilere göre daha güvenlidir. Dinamik yönlendiricilerde güvenliği arttırmak için elle biçimlendirme tercih edilebilir.
+
+NIC (Ağ Arabirim Kartı) := Bilgisayarın bir ağa bağlanmasını sağlayan donanımdır.
+
+CSU / DSU := Tam anlayamadım. 
+------------------------------------------------------
+Şuradaki Quizdeki sorulara cevap vermeye çalıştım.
+https://www.exam-labs.com/exam/200-125

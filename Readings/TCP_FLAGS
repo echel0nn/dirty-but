@@ -1,0 +1,16 @@
+CWR: CONGESTIO0N WINDOWS REDUCED
+ECE: ECN-Echo - indicate that the TCP peer is ECN capable during 3-way handshake
+URG: indicates that the URGent pointer field is significant
+ACK: indicates that the ACKnowledgment field is significant
+PSH: push function
+RST: ReSeT the connection
+SYN: SYNchronize sequence numbers ( seen on new connections )
+FIN: No more data from sender
+
+FIN = 1
+SYN = 2
+RST = 4
+PSH = 8
+URG = 32
+ECE = 64
+CWR = 128

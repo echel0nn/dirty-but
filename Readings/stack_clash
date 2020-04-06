@@ -1,0 +1,52 @@
+CVE-2017-1000364 Kodlu zaafiyette 2010'da Linux kernel'inde sunulan
+4k stack guard page yeteri kadar geniş olmadığından ve bu korumanın
+bypass edilebildiği bulunmuş.Bu zaafiyet 4.11.5 ve eski Linux kernellerini
+kapsıyor ve zaafiyet ile yerel yetki yükseltme veya en yüksek yetki ile
+kod çalıştırmasına yol açılıyor.
+
+Stackguard bypass edilmesiyle stack overflow zaafiyeti oluşuyor.
+Zaafiyetin genel konsepti şöyle işliyor;
+	- Clashing, memory allocate ediliyor ta ki stack diğer
+	  ayrılmış bir hafızanın sınırına gelene kadar.
+	- Jumping, stack guard-page bypass ediliyor, stack-pointer'ı
+	  oluşturulan stackten diğer ayrılmış hafızanın bölgesine
+	  geçiriliyor.
+	- Smashing, stack-pointer'ın olduğu yeri önceki stack ile
+	  overwrite ediiliyor.
+
+Tabi zaafiyet sadece Linux üzerinde değil diğer BSD tabanlı işletim
+sistemleri üzerinde de geçerli. Bu stack guard-page implementasyonu
+yapılan hepsi için geçerli.
+Örnek olarak OpenBSD için;
+
+# PoCs against /usr/bin/at i386 OpenBSD
+	https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000372
+	https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000373
+	- CVE-2017-1000372 # Open-BSD stack guard-page implementation
+	- CVE-2017-1000373 # Open-BSD qsort() function.
+
+Sorunun kaynağı, genel olarak bakarsak spesifik olarak işletim sistemi tabanlı değil,
+bu zaafiyet stack guard-page'in yetersizliğinden kaynaklanıyor.
+
+-- Maximum RLIMIT_STACK zafiyeti ( CVE-2017-1000372 )
+OpenBSD kerneli user-space stack'ini(RLIMIT_STACK) MAXSSIZ(32MB)'de limitliyor.
+execve() system-call MAXSSIZ kadar bir memory bölgesi ayırıyor stack için, sonra
+o bölgeyi ikiye bölüyor.
+
+İkinci ayrılmış bölge -genel olarak user-space stack'e ayrılan-, PROT_READ|PROT_WRITE'ı
+bu stack bölgesinin sonuna yerleştiriyor.RLIMIT_STACK byte'ları kadar yer kaplıyor.
+ (Varsayılan olarak 8 MB root süreçleri için, 4MB'de user süreçleri için.)
+
+İlk ayrılmış bölge ise stack guard-page için genel olarak ayrılıyor. 
+PROT_NONE bu stack memory bölgesinin en başında yer alıyor ve MAXSSIZ - RLIMIT_STACK kadar yer kaplıyor.
+
+Eğer saldırgan RLIMIT_STACK'i MAXSSIZ'a set ederse, saldırgan bu memory bölgesinin
+PROT_NONE tarafını etkisiz hale getiriyor.
+
+Bu zafiyet local bir zaafiyettir, dışarıdan kullanılabilecek bir zaafiyet değildir
+Saldırgan sadece yerel olarak RLIMIT_STACK'i MAXSSIZ'a set edebiliyor.
+
+Adım 1: Diğer stack bölgesinin başlangıcına kadar heap memory yeri ayrılır.( Neredeyse 2GB)
+Adım 2 ve 3: Diğer stack bölgesinin başlangıcına gelene kadar bulunan stack bölgesi tüketilir ( MAXSSIZ 32MB ), ve bu şekilde heap memory'e ulaşılır. (clashing)
+
+Son adım: Heap'i stack'e veya stack'i heap'e smash edilir.

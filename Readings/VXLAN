@@ -1,0 +1,32 @@
+VXLAN kısaca logical ağ oluşturup, sanal makinaları
+başka ağlara bağlantısını gerçekleştirir.Bu işlemi de, Layer 2 trafiğini
+Layer 3 network üzerinden tünelleyerek gerçekleştirir.( Overlay network)
+Normal network'te eğer bir sanal makinaya, başka bir subnetteki
+sanal makina ile ulaşmak istiyorsak, layer 3 router kullanmamız gerekiyor
+bu bağlantıyı sağlayabilmemiz için.
+
+Bunların dışında normal VLAN'ların eksik olduğu asıl ana bir nokta var.
+Normalde, cloud computing hizmeti sağlayan firmalar, insanlar hizmetlerini
+VLAN üzerinden ayırabilir, konfigirasyonu yapabilir fakat şöyle bir durum
+söz konusu. VLAN adres boşluğu toplamda sadece 4096(2^12) tane adres tanımlaması
+içerebiliyor.Yani çok büyük cloudlar için bu güzel bir sayı değil.
+Yani VXLAN bu kısıtlamayı çok üst düzey bir şekilde çözüyor.
+Adres tanımlama boşluğunu 16 milyona kadar çıkartıyor.(12 bit(VLAN) --> 24 bit)
+
+
+Topolojide ağı birleştirmek için STP'ye ihtiyaç duyulmuyor.
+Multicast özelliği olan IP network ve MTU boyutunun ayarlanması gerekiyor
+fiziksel cihazların üzerinde.Data Center'lar arasında hata izolasyonu sağlıyor.
+Uygulaması basit, platforma bağımsız özellikle bir donanım veya ekipmana ihtiyaç
+duyulmamakta. Daha geniş Data Center altyapısı yönetilebilir ve kontrol edilebilir.
+
+
+VXLAN'ı destekleyen cihazlara virtual tunnel endpoints deniyor(VTEP).
+Sonlandırıcı host,switch veya router gibi cihazlar olabilir.
+
+VTEP'ler normal Ethernet Paketine şu satırları ekler;
+  - Dış MAC adresi.
+  - Dış kaynak MAC  adresi.
+  - Dış IP adresi.
+  - Dış kaynak IP adresi.
+  - Dış UDP header'ı

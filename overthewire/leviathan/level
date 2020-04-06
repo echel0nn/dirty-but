@@ -1,0 +1,58 @@
+level 0:
+
+username: leviathan0
+password: leviathan1
+
+$:cd .backup/
+$:cat *.xml
+$:# we see backups "O RLY!"
+$: cat * | grep -i leviathan
+<DT><A HREF="http://leviathan.labs.overthewire.org/passwordus.html | This will be fixed later, the password for leviathan1 is rioGegei8m" ADD_DATE="1155384634" LAST_CHARSET="ISO-8859-1" ID="rdf:#$2wIU71">password to leviathan1</A><Paste>
+
+leviathan1
+rioGegei8m
+
+
+level 1:
+$: gdb check
+$: set disassembly-flavor intel
+$: disas main
+
+   0x080485a3 <+22>:    mov    DWORD PTR [esp+0x18],0x786573
+   0x080485ab <+30>: mov    DWORD PTR [esp+0x25],0x72636573
+   0x080485b3 <+38>:  mov    WORD PTR [esp+0x29],0x7465
+   0x080485ba <+45>:   mov    BYTE PTR [esp+0x2b],0x0
+   0x080485bf <+50>:    mov    DWORD PTR [esp+0x1c],0x646f67
+   0x080485c7 <+58>: mov    DWORD PTR [esp+0x20],0x65766f6c
+   0x080485cf <+66>:  mov    BYTE PTR [esp+0x24],0x0
+
+...
+...
+
+   0x0804860f <+130>:   call   0x80483f0 <strcmp@plt>
+   0x08048614 <+135>:    test   eax,eax
+   0x08048616 <+137>: jne    0x804863e <main+177>
+   0x08048618 <+139>:  call   0x8048430 <geteuid@plt>
+# we see \0 terminator, so it is a string.
+# After some lines we see the binary compare the input to this $esp
+# then gives a shell.
+# the password is sexsecretgodlove [$esp]
+$: cat /etc/leviathan_pass/leviathan2
+
+leviathan1@leviathan:~$ ./check
+password: sexsecretgodlove
+$ whoami
+leviathan2
+$ cat /etc/leviathan_pass/leviathan2
+ougahZi8Ta
+$ 
+
+level 2:
+	$: mkdir /tmp/echel0n
+	$: cd /tmp/echel0n
+	$: touch hehe\ haha.txt
+	$: ln -s /etc/leviathan_pass/leviathan3 hehe
+	$: (ltrace required to solve this.)
+	$: ~/printfile "hehe haha.txt"
+level 3:
+Ahdiemoo1j

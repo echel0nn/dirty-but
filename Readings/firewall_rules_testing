@@ -1,0 +1,64 @@
+
+Testing ICMP:
+	--ICMP echo
+		hping3 -1 google.com
+
+Traceroute using ICMP:
+	hping3 --traceroute -V -1 google.com
+
+Traceroute to a determined port:
+	hping3 --traceroute -V -S -p 80 -s 5050 google.com
+
+ICMP address mask request:
+	hping3 -c 1 -V -1 -C 17 google.com
+
+FIN scan Port Scanning:
+	-- FIN flag'i bağlantıyı bitirmeden önceki pakettir.
+	-- Eğer cevap gelmesse demekki port açık.
+	-- Normalde RST+ACK paketi yollayacak firewall bize doğru rule yazıldıysa.
+	hping3 -c 1 -V -p 80 -s 5050 -F google.com
+
+ACK Scan:
+	-- Eğer pingleyemiyorsak sadece ACK paketi üzerinden host'un durumunu kontrol edebiliriz.
+	-- Eğer port açık ise RST paketi döner.
+
+	hping3 -c 1 -V -p 80 -s 5050 -A 192.168.56.101 <example>
+
+Xmas Scan:
+	-- URG + PSH + FIN paketleri kullanılır.
+	-- Sıra numarasını sıfıra ayarlar.
+	-- Eğer karşı taraftaki aygıt TCP port'u kapalıysa,
+	-- TCP RST paketi cevabı gelir.Eğer port açık ise
+	-- Karşıdaki aygıt Xmas scan'ı iptal eder ve cevap yollamaz.
+	
+	hping -c 1 -V -p 80 -s 5050 -M 0 -UPF 192.168.56.101
+
+NULL Scan:
+	-- Sıra numaraları sıfıra ayarlanır.
+	-- Flag girilmez paketlerin içine.
+	-- TCP port kapalıysa sadece TCP RST paketi cevabı gelir.
+
+	hping3 -c 1 -V -p 80 -s 5050 -Y 192.168.56.101
+
+Smurf Attack:
+	-- DDoS tipidir.
+	-- Hedef sisteme spooflanmış broadcast ping mesajları floodlar.	
+
+	hping3 -1 --flood -a <HEDEFIN_IP_BROADCAST_ADDRESSI>
+DOS Land Attack:
+	hping3 -V -c 999999 -d 120 -w 64 -p 445 -s 445 --flood --rand-source 192.168.56.101
+
+SYN Flood:
+	hping3 -a <SAHTE_IP> -p <HEDEF_PORT> -s <HEDEF_IP> // veya -a komutu yerine --rand-source diyip rastgele IP
+
+Kullanılan Modların açıklaması:
+	* --flood : paketleri atabileceğin hızda at cevapları gösterme.
+	* --rand-dest: Rastgele dest adres modu.
+	* -V : ayrıntı modu
+	* -c : counter
+	* -d : data büyüklüğü
+	* -S: SYN bayrağını set et.
+	* -w:  winsize
+	* -p: hedef port
+	* -s: kaynak port (varsayılan rastgele)
+

